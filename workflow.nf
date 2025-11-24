@@ -14,11 +14,13 @@ workflow ANVIO_WORKFLOW {
             .fromPath("${params.genomes}/*.fna")
             .map { file -> tuple(file.baseName, file) }
         // Channel for COG20 database directory
-        cog_db_ch = params.cog_db ? Channel.fromPath(params.cog_db, checkIfExists: true) : Channel.empty()
-                // Channel for KEGG database directory
-        kegg_db_ch = params.kegg_db ? Channel.fromPath(params.kegg_db, checkIfExists: true) : Channel.empty()
-
-        GENOMEDB ( genome_files, cog_db_ch, kegg_db_ch )
+        cog_db_ch = Channel.value(file( "${params.host_index}" ))
+        // Channel for KEGG database directory
+        kegg_db_ch = Channel.value(file( "${params.kegg_db}" ))
+        // Channel for SCG taxonomy directory
+        scg_taxonomy_ch = Channel.value(file( "${params.scg_taxonomy}" ))
+    
+        GENOMEDB ( genome_files, cog_db_ch, kegg_db_ch, scg_taxonomy_ch )
     }
     if (params.run_pangenmoe) {
     	genome_dbs = GENOMEDB.out.genome_db.collect()

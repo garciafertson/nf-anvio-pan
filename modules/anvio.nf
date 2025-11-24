@@ -17,7 +17,10 @@ process GENOMEDB {
     
     input:
     tuple val(genome_name), path(fasta)
-    
+	path(kegg)
+	path(cog20)
+    path(scg_taxonomy)
+	
     output:
     tuple val(genome_name), path("${genome_name}.db"), emit: genome_db
     
@@ -32,10 +35,10 @@ process GENOMEDB {
                           --num-threads 2 \
                           -n ${genome_name}
 
-	anvi-run-ncbi-cogs -c ${genome_name}.db --num-threads ${params.threads}
+	anvi-run-ncbi-cogs -c ${genome_name}.db --num-threads ${params.threads} --cog-data-dir ${cog20}
 	anvi-scan-trnas -c ${genome_name}.db --num-threads ${params.threads}
-	anvi-run-scg-taxonomy -c ${genome_name}.db --num-threads ${params.threads}
-	anvi-run-kegg-kofams -c ${genome_name}.db --num-threads ${params.threads}
+	anvi-run-scg-taxonomy -c ${genome_name}.db --num-threads ${params.threads} --taxonomy-data-dir ${scg_taxonomy}
+	anvi-run-kegg-kofams -c ${genome_name}.db --num-threads ${params.threads} --kegg-data-dir ${kegg}
     """
 }
 
