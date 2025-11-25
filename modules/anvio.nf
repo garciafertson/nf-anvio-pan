@@ -33,12 +33,12 @@ process GENOMEDB {
 
 	anvi-gen-contigs-database -f ${genome_name}_scaffolds_1K.fasta \
                           -o ${genome_name}.db \
-                          --num-threads 2 \
+                          --num-threads ${params.threads} \
                           -n ${genome_name}
 
 	anvi-run-ncbi-cogs -c ${genome_name}.db --num-threads ${params.threads} --cog-data-dir ${cog20}
 	anvi-scan-trnas -c ${genome_name}.db --num-threads ${params.threads}
-	anvi-run-scg-taxonomy -c ${genome_name}.db --num-threads ${params.threads} --taxonomy-data-dir ${scg_taxonomy}
+	anvi-run-scg-taxonomy -c ${genome_name}.db --num-threads ${params.threads} --scgs-taxonomy-data-dir ${scg_taxonomy}
 	anvi-run-kegg-kofams -c ${genome_name}.db --num-threads ${params.threads} --kegg-data-dir ${kegg}
     """
 }
