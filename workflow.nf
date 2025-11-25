@@ -2,8 +2,8 @@
 nextflow.enable.dsl=2
 
 // Import Anvi'o modules
-include { PANGENOME } from '../modules/anvio.nf'
-include { GENOMEDB } from '../modules/anvio.nf'
+include { PANGENOME } from './modules/anvio.nf'
+include { GENOMEDB } from './modules/anvio.nf'
 
 workflow ANVIO_WORKFLOW {
     //control structure 2 parameters    
