@@ -20,10 +20,11 @@ process GENOMEDB {
 	path(kegg)
 	path(cog20)
     path(scg_taxonomy)
-	
+
     output:
     tuple val(genome_name), path("${genome_name}.db"), emit: genome_db
     
+	script:
     """
     anvi-script-reformat-fasta ${fasta} \\
         --min-len ${params.min_length} \\
