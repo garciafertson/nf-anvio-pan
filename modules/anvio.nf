@@ -58,7 +58,7 @@ process PANGENOME {
     path(dbs)
     
     output:
-    tuple path("external-genomes.txt"), path("GENOMES.db"), 
+    tuple path("external-genomes.txt"), path("GENOMES.db"), emit: pangenome_db
     
     script:
     """
