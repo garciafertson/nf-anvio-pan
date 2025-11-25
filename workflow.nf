@@ -11,7 +11,7 @@ workflow ANVIO_WORKFLOW {
     // Channel for genome directory in fasta format
     if (params.run_genomedb) {
         genome_files = Channel
-            .fromPath("${params.genomes}/*.fna")
+            .fromPath("${params.genomes}")
             .map { file -> tuple(file.baseName, file) }
         // Channel for COG20 database directory
         cog_db_ch = Channel.value(file( "${params.cog_db}" ))
