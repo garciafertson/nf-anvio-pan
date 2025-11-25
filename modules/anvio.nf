@@ -17,8 +17,8 @@ process GENOMEDB {
     
     input:
     tuple val(genome_name), path(fasta)
-	path(kegg)
 	path(cog20)
+	path(kegg)
     path(scg_taxonomy)
 
     output:
