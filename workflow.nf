@@ -22,7 +22,7 @@ workflow ANVIO_WORKFLOW {
     
         GENOMEDB ( genome_files, cog_db_ch, kegg_db_ch, scg_taxonomy_ch )
     }
-    if (params.run_pangenmoe) {
+    if (params.run_pangenome) {
     	genome_dbs = GENOMEDB.out.genome_db.collect()
     	PANGENOME ( genome_dbs  )
     }

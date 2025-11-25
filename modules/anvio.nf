@@ -33,14 +33,14 @@ process GENOMEDB {
 
 	anvi-gen-contigs-database -f ${genome_name}_scaffolds_1K.fasta \
                           -o ${genome_name}.db \
-                          --num-threads ${params.threads} \
+                          --num-threads ${task.cpus} \
                           -n ${genome_name}
 
-	anvi-run-hmms -c ${genome_name}.db --num-threads ${params.threads}
-	anvi-run-ncbi-cogs -c ${genome_name}.db --num-threads ${params.threads} --cog-data-dir ${cog20}
-	anvi-scan-trnas -c ${genome_name}.db --num-threads ${params.threads}
-	anvi-run-scg-taxonomy -c ${genome_name}.db --num-threads ${params.threads} --scgs-taxonomy-data-dir ${scg_taxonomy}
-	anvi-run-kegg-kofams -c ${genome_name}.db --num-threads ${params.threads} --kegg-data-dir ${kegg}
+	anvi-run-hmms -c ${genome_name}.db --num-threads ${task.cpus}
+	anvi-run-ncbi-cogs -c ${genome_name}.db --num-threads ${task.cpus} --cog-data-dir ${cog20}
+	anvi-scan-trnas -c ${genome_name}.db --num-threads ${task.cpus}
+	anvi-run-scg-taxonomy -c ${genome_name}.db --num-threads ${task.cpus} --scgs-taxonomy-data-dir ${scg_taxonomy}
+	anvi-run-kegg-kofams -c ${genome_name}.db --num-threads ${task.cpus} --kegg-data-dir ${kegg}
     """
 }
 
@@ -77,12 +77,12 @@ process PANGENOME {
 
     anvi-pan-genome -g ${genomes_db} \\
         --project-name ${params.project_name} \\
-        --num-threads ${params.threads}
+        --num-threads ${task.cpus} \\
 
     anvi-compute-genome-similarity --external-genomes external-genomes.txt \\
         --program fastANI \\
         --output-dir ANI \\
-        --num-threads ${params.threads} \\
+        --num-threads ${task.cpus} \\
         --pan-db ${params.project_name}/${params.project_name}-PAN.db
     """
 }
