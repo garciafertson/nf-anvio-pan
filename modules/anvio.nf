@@ -36,6 +36,7 @@ process GENOMEDB {
                           --num-threads ${params.threads} \
                           -n ${genome_name}
 
+	anvi-run-hmms -c ${genome_name}.db --num-threads ${params.threads}
 	anvi-run-ncbi-cogs -c ${genome_name}.db --num-threads ${params.threads} --cog-data-dir ${cog20}
 	anvi-scan-trnas -c ${genome_name}.db --num-threads ${params.threads}
 	anvi-run-scg-taxonomy -c ${genome_name}.db --num-threads ${params.threads} --scgs-taxonomy-data-dir ${scg_taxonomy}
