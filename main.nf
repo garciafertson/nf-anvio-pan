@@ -10,7 +10,6 @@ params.cog_db = null
 params.kegg_db = null
 params.outdir = "./results"
 params.min_length = 1000
-params.threads = 4
 
 // Main workflow
 workflow {

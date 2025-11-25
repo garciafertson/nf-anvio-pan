@@ -8,8 +8,8 @@ process GENOMEDB {
 
     publishDir "${params.outdir}/genome_db", mode: 'copy'
 	container "docker://sysbiojfgg-anvio_cogpfam:v0.1"
-	cpus = { 4 * task.attempt }
-	memory = '8.GB'
+	cpus = { 2 * task.attempt }
+	memory = '12.GB'
 	time = { 5.h * task.attempt }
 	errorStrategy {  task.exitStatus in [143,137,104,134,139,255] ? 'retry' : 'finish' }
 	maxRetries = 2
