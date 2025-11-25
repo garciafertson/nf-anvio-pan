@@ -14,7 +14,7 @@ workflow ANVIO_WORKFLOW {
             .fromPath("${params.genomes}/*.fna")
             .map { file -> tuple(file.baseName, file) }
         // Channel for COG20 database directory
-        cog_db_ch = Channel.value(file( "${params.host_index}" ))
+        cog_db_ch = Channel.value(file( "${params.cog_db}" ))
         // Channel for KEGG database directory
         kegg_db_ch = Channel.value(file( "${params.kegg_db}" ))
         // Channel for SCG taxonomy directory
