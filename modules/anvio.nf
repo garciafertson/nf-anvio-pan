@@ -7,7 +7,7 @@ nextflow.enable.dsl=2
 process GENOMEDB {
 
     publishDir "${params.outdir}/genome_db", mode: 'copy'
-	container "docker://sysbiojfgg-anvio_cogpfam:v0.1.img"
+	container "docker://sysbiojfgg-anvio_cogpfam:v0.1"
 	cpus = { 2 * task.attempt }
 	memory = '8.GB'
 	time = { 5.h * task.attempt }
@@ -46,7 +46,7 @@ process GENOMEDB {
 // Process for generating external genomes file for pangenome
 process PANGENOME {
     publishDir "${params.outdir}/pangenome", mode: 'copy'
-	container "docker://sysbiojfgg-anvio_cogpfam:v0.1.img"
+	container "docker://sysbiojfgg-anvio_cogpfam:v0.1"
 	cpus = { 12 * task.attempt }
 	memory = '48.GB'
 	time = { 12.h * task.attempt }
