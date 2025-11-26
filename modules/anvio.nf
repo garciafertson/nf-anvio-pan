@@ -11,7 +11,7 @@ process GENOMEDB {
 	cpus = { 2 * task.attempt }
 	memory = '12.GB'
 	time = { 5.h * task.attempt }
-	errorStrategy {  task.exitStatus in [143,137,104,134,139,255] ? 'retry' : 'finish' }
+	errorStrategy {  task.exitStatus in [140,143,137,104,134,139,255] ? 'retry' : 'finish' }
 	maxRetries = 2
 	maxForks 40
     
