@@ -8,12 +8,12 @@ process GENOMEDB {
 
     publishDir "${params.outdir}/genome_db", mode: 'copy'
 	container "docker://meren/anvio:8"
-	cpus = { 2 * task.attempt }
+	cpus =  { 4 * task.attempt }
 	memory = '12.GB'
-	time = { 5.h * task.attempt }
+	time = { 4.h * task.attempt }
 	errorStrategy {  task.exitStatus in [140,143,137,104,134,139,255] ? 'retry' : 'finish' }
 	maxRetries = 2
-	maxForks 30
+	maxForks 25
     
     input:
     tuple val(genome_name), path(fasta)
