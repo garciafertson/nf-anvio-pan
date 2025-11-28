@@ -40,7 +40,10 @@ process GENOMEDB {
 	anvi-run-ncbi-cogs -c ${genome_name}.db --num-threads ${task.cpus} --cog-data-dir ${cog20}
 	anvi-scan-trnas -c ${genome_name}.db --num-threads ${task.cpus}
 	anvi-run-scg-taxonomy -c ${genome_name}.db --num-threads ${task.cpus} --scgs-taxonomy-data-dir ${scg_taxonomy}
-	anvi-run-kegg-kofams -c ${genome_name}.db --num-threads ${task.cpus} --kegg-data-dir ${kegg}
+	anvi-run-kegg-kofams -c ${genome_name}.db --num-threads ${task.cpus} \
+             --kegg-data-dir ${kegg} \
+             --hmmer-program hmmsearch
+    echo "Finished processing ${genome_name}"
     """
 }
 
